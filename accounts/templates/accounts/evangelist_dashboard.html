@@ -1,0 +1,284 @@
+{% extends 'evangelist_base.html' %}
+
+{% block content %}
+<!-- Header with greeting -->
+<h2 class="header-title">
+    👤 Yo {{ request.user.church_member.full_name }} (ID: {{ request.user.church_member.member_id }}), 
+    welcome to your evangelist dashboard!
+</h2>
+
+<!-- Stack of buttons, one per row -->
+<div class="button-stack">
+    <!-- Home Button -->
+    <a href="{% url 'evangelist_dashboard' %}" class="big-button home-button">
+        <div class="button-text">
+            <span class="button-emoji">🏠</span>
+            <div class="text-content">
+                <h3>Home</h3>
+                <p>Your main spot for evangelist tools.</p>
+            </div>
+            <span class="arrow-emoji">➡️</span>
+        </div>
+    </a>
+
+    <!-- Details Button -->
+    <a href="{% url 'evangelist_details' %}" class="big-button details-button">
+        <div class="button-text">
+            <span class="button-emoji">📋</span>
+            <div class="text-content">
+                <h3>Details</h3>
+                <p>Update your personal info.</p>
+            </div>
+            <span class="arrow-emoji">➡️</span>
+        </div>
+    </a>
+
+    <!-- Leaders Button -->
+    <a href="{% url 'evangelist_leaders_home' %}" class="big-button leaders-button">
+        <div class="button-text">
+            <span class="button-emoji">👥</span>
+            <div class="text-content">
+                <h3>Leaders</h3>
+                <p>Manage church leaders.</p>
+            </div>
+            <span class="arrow-emoji">➡️</span>
+        </div>
+    </a>
+
+    <!-- Members Button -->
+    <a href="{% url 'evangelist_members_home' %}" class="big-button members-button">
+        <div class="button-text">
+            <span class="button-emoji">🙍‍♂️</span>
+            <div class="text-content">
+                <h3>Members</h3>
+                <p>View church members.</p>
+            </div>
+            <span class="arrow-emoji">➡️</span>
+        </div>
+    </a>
+
+    <!-- Posts Button -->
+    <a href="{% url 'evangelist_news_home' %}" class="big-button posts-button">
+        <div class="button-text">
+            <span class="button-emoji">📝</span>
+            <div class="text-content">
+                <h3>Posts</h3>
+                <p>Handle news posts.</p>
+            </div>
+            <span class="arrow-emoji">➡️</span>
+        </div>
+    </a>
+
+    <!-- Notifications Button -->
+    <a href="{% url 'evangelist_notifications' %}" class="big-button notifications-button">
+        <div class="button-text">
+            <span class="button-emoji">🔔</span>
+            <div class="text-content">
+                <h3>Notifications</h3>
+                <p>Stay updated with alerts.</p>
+            </div>
+            <span class="arrow-emoji">➡️</span>
+        </div>
+    </a>
+
+    <!-- Help Button -->
+    <a href="{% url 'evangelist_chatbot' %}" class="big-button help-button">
+        <div class="button-text">
+            <span class="button-emoji">🆘</span>
+            <div class="text-content">
+                <h3>Help</h3>
+                <p>Get support with the app.</p>
+            </div>
+            <span class="arrow-emoji">➡️</span>
+        </div>
+    </a>
+
+    <!-- Public Page Button -->
+    <a href="{% url 'public_news_list' %}" class="big-button public-posts-button">
+        <div class="button-text">
+            <span class="button-emoji">🌐</span>
+            <div class="text-content">
+                <h3>Public Page</h3>
+                <p>View public news.</p>
+            </div>
+            <span class="arrow-emoji">➡️</span>
+        </div>
+    </a>
+
+    <!-- Offerings Button -->
+    <a href="#" class="big-button offerings-button">
+        <div class="button-text">
+            <span class="button-emoji">💰</span>
+            <div class="text-content">
+                <h3>Offerings</h3>
+                <p>Manage outstation offerings.</p>
+            </div>
+            <span class="arrow-emoji">➡️</span>
+        </div>
+    </a>
+</div>
+
+<!-- Styling for buttons, one per row -->
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+        width: 100%;
+        overflow-x: hidden;
+    }
+
+    :root {
+        --text-color: #fff;
+        --shadow: rgba(0, 0, 0, 0.3);
+    }
+
+    [data-theme="dark"] {
+        --text-color: #e0e0e0;
+        --shadow: rgba(0, 0, 0, 0.5);
+    }
+
+    .header-title {
+        font-size: 22px;
+        font-weight: bold;
+        margin: 15px;
+        color: #007bff;
+        text-align: center;
+    }
+
+    .button-stack {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+        padding: 0 10px;
+        box-sizing: border-box;
+    }
+
+    .big-button {
+        width: 100%;
+        max-width: 100vw;
+        height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        color: var(--text-color);
+        background: linear-gradient(130deg, #007bff, #0056b3);
+        box-shadow: 0 3px 8px var(--shadow);
+        transition: transform 0.2s ease;
+        margin: 8px 0;
+        border-radius: 12px;
+        box-sizing: border-box;
+    }
+
+    /* Button colors */
+    .home-button {
+        background: linear-gradient(130deg, #007bff, #0056b3);
+    }
+    .details-button {
+        background: linear-gradient(130deg, #6F42C1, #512DA8);
+    }
+    .leaders-button {
+        background: linear-gradient(130deg, #FF9800, #F57C00);
+    }
+    .members-button {
+        background: linear-gradient(130deg, #28a745, #218838);
+    }
+    .posts-button {
+        background: linear-gradient(130deg, #FFC107, #FFA000);
+    }
+    .notifications-button {
+        background: linear-gradient(130deg, #17A2B8, #117A8B);
+    }
+    .help-button {
+        background: linear-gradient(130deg, #FF5733, #C70039);
+    }
+    .public-posts-button {
+        background: linear-gradient(130deg, #9c27b0, #7b1fa2);
+    }
+    .offerings-button {
+        background: linear-gradient(130deg, #dc3545, #b02a37);
+    }
+
+    .button-text {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 90%;
+        padding: 10px;
+    }
+
+    .button-emoji {
+        font-size: 28px;
+        flex-shrink: 0;
+    }
+
+    .text-content {
+        flex-grow: 1;
+        text-align: left;
+        margin: 0 15px;
+    }
+
+    .big-button h3 {
+        font-size: 18px;
+        font-weight: bold;
+        margin: 0;
+    }
+
+    .big-button p {
+        font-size: 13px;
+        margin: 2px 0 0;
+    }
+
+    .arrow-emoji {
+        font-size: 26px;
+        flex-shrink: 0;
+        transition: transform 0.2s ease;
+    }
+
+    .big-button:hover {
+        transform: scale(1.02);
+    }
+
+    .big-button:hover .arrow-emoji {
+        transform: translateX(5px);
+    }
+
+    .big-button:active {
+        transform: scale(0.98);
+    }
+
+    /* Smaller screens */
+    @media screen and (max-width: 768px) {
+        .big-button {
+            height: 90px;
+        }
+        .button-text {
+            width: 95%;
+        }
+        .button-emoji {
+            font-size: 26px;
+        }
+        .big-button h3 {
+            font-size: 16px;
+        }
+        .big-button p {
+            font-size: 12px;
+        }
+        .arrow-emoji {
+            font-size: 24px;
+        }
+        .header-title {
+            font-size: 20px;
+        }
+    }
+
+    /* Scrollable page */
+    html, body {
+        height: 100%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+</style>
+{% endblock %}
